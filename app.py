@@ -6,8 +6,6 @@ from routes.auth import auth
 from routes.guilds import guilds
 from routes.user import user
 from quart_discord import DiscordOAuth2Session
-from discord.ext import ipc
-from discord.ext.ipc import Client
 load_dotenv()
 app = Quart(__name__)
 # IPC = Client(host="127.0.0.1", port=8080, secret_key=os.environ["SECRET_KEY"])
