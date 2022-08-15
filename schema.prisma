@@ -1,0 +1,15 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./db/database.db"
+}
+
+// generator
+generator client {
+  provider = "prisma-client-py"
+}
+
+model User {
+  id    BigInt  @id
+  email String  @unique
+  name  String?
+}

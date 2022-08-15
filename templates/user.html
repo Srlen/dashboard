@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='styles/style.css') }}"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{user.name}}</title>
+  </head>
+  <body>
+    <h1><a id="login" href="{{logout}}">تسجيل خروج</a></h1>
+    <div id="user">
+      <div class="border">
+        <img class="user-avatar"
+          src="{{user.avatar_url or user.default_avatar_url}}"
+          alt="avatar"
+          width="128"
+        />
+        <h1>{{user.name}}</h1>
+      </div>
+    </div>
+    <div>
+      <ul class="guilds">
+        {% for guild in guilds if guild.permissions.administrator %}
+        <li class="temp-box">
+          {% if guild.icon_hash != None %}
+            <img class="guild-avatar" src="https://cdn.discordapp.com/icons/{{guild.id}}/{{guild.icon_hash}}.png" alt="icon" width="128"/>
+            <h3>{{guild.name}}</h3>
+          {% elif guild.icon_hash == None %}
+            <img class="guild-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="icon" width="128" />
+            <h3>{{guild.name}}</h3>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    </div>
+  </body>
+</html>
