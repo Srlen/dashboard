@@ -6,14 +6,16 @@ body {
     color: white;
 }
 
-#user {
-    display: flex;
-    justify-content: center;
-}
-.user-avatar {
+#login {
+    text-decoration: none;
+    border: 10px solid cornflowerblue;
+    border-top: 100px;
+    border-bottom: 100px;
+    background-color: cornflowerblue;
+    color: white;
     border-radius: 50px;
 }
-.border {
+/* .border {
     border: 10px solid cornflowerblue;
     border-radius: 50px;
     display: flex;
@@ -24,34 +26,8 @@ body {
     padding-right: 100px;
     padding-left: 100px;
     padding-bottom: 10px;
-    
-}
-#login {
-    text-decoration: none;
-    border: 10px solid cornflowerblue;
-    border-top: 100px;
-    border-bottom: 100px;
-    background-color: cornflowerblue;
-    color: white;
-    border-radius: 50px;
-}
-.guild-avatar {
-    margin-top: 10px;
-    border-radius: 50px;
-}
-.guilds {
-    display: flex;
-    list-style: none;
-    flex-flow: row wrap;
-    justify-content: space-around;
-}
-.temp-box {
-    border: 8px solid cornflowerblue;
-    width: 300px;
-    border-radius: 50px;
-    margin: 100px;
-    text-align: center;
-}
+     */
+/* } */
 ::-webkit-scrollbar {
     display: none;
 }

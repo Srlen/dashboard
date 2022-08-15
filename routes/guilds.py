@@ -1,8 +1,10 @@
-from flask import Blueprint, redirect, url_for, render_template, current_app
-from flask_discord import DiscordOAuth2Session, requires_authorization, Unauthorized
+from quart import Blueprint, redirect, url_for, render_template, current_app
+from quart_discord import Unauthorized, requires_authorization
 
 guilds = Blueprint("guilds", __name__)
+
 @guilds.route("/add_to/<int:guild_id>/")
+@requires_authorization
 async def add_to_guild(guild_id):
-    user = current_app.discord.fetch_user()
+    user = await current_app.discord.fetch_user()
     return user.add_to_guild(guild_id)
