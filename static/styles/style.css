@@ -15,7 +15,7 @@ body {
     color: white;
     border-radius: 50px;
 }
-/* .border {
+.border {
     border: 10px solid cornflowerblue;
     border-radius: 50px;
     display: flex;
@@ -26,8 +26,7 @@ body {
     padding-right: 100px;
     padding-left: 100px;
     padding-bottom: 10px;
-     */
-/* } */
+}
 ::-webkit-scrollbar {
     display: none;
 }
