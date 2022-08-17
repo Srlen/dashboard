@@ -1,4 +1,5 @@
 import logging
+import os
 import discord
 import sys
 
@@ -6,9 +7,6 @@ from quart import Blueprint, redirect, url_for, render_template, current_app
 from quart_discord import Unauthorized, requires_authorization
 
 from discord.ext import commands, ipc
-from discord.ext.ipc.errors import IPCError
-from discord.ext.ipc.server import route
-
 
 # class Routes(commands.Cog):
 #     """"""
@@ -35,8 +33,6 @@ from discord.ext.ipc.server import route
 
 
 auth = Blueprint("auth", __name__)
-
-
 @auth.route("/")
 async def index():
     if not await current_app.discord.authorized:
@@ -46,7 +42,7 @@ async def index():
 
 @auth.route("/login-data/")
 async def login_with_data():
-    return await current_app.discord.create_session(data=dict(redirect="/me/", coupon="15off", number=15, zero=0, status=False))
+    return await current_app.discord.create_session()
 
 @auth.route("/logout/")
 @requires_authorization
@@ -54,13 +50,11 @@ async def logout():
     current_app.discord.revoke()
     return redirect("http://127.0.0.1:5000/")
 
-
 @auth.route("/callback/")
 async def callback():
     await current_app.discord.callback()
-
     user = await current_app.discord.fetch_user()
-
+    await current_app.client.request("auth_done", user_id=user.id)
     return redirect(url_for(".me"))
 
 @auth.route("/me/")

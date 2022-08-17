@@ -1,7 +1,7 @@
 .guild-avatar {
     margin-top: 10px;
     border-radius: 50px;
-    filter: grayscale(100%);
+    filter: grayscale(50%);
 }
 .guilds {
     display: flex;
