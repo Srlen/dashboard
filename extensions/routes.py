@@ -10,8 +10,13 @@ class Routes(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
         if not hasattr(bot, "ipc"):
-            bot.ipc = ipc.Server(self.bot, host="127.0.0.1", port=8080, secret_key=os.environ["SECRET_KEY"])
-            bot.ipc.start()
+            bot.ipc = ipc.Server(self.bot, standart_port=4000, secret_key=os.environ["SECRET_KEY"], do_multicast=False)
+
+    async def cog_load(self) -> None:
+        await self.bot.ipc.start()
+
+    async def cog_unload(self) -> None:
+        await self.bot.ipc.stop()
 
     @commands.Cog.listener()
     async def on_ipc_ready(self):
@@ -28,4 +33,5 @@ class Routes(commands.Cog):
         return user._to_minimal_user_json() # THE OUTPUT MUST BE JSON SERIALIZABLE!
 
 async def setup(bot):
+    print("test2")
     await bot.add_cog(Routes(bot))
