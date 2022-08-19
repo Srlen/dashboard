@@ -8,8 +8,14 @@ generator client {
   provider = "prisma-client-py"
 }
 
-model User {
-  id    BigInt  @id
-  email String  @unique
-  name  String?
+model Guild {
+  id     BigInt   @id @unique
+  prefix Prefix[]
+}
+
+model Prefix {
+  id      Int  @id @default(autoincrement())
+  prefix String
+  Guild   Guild  @relation(fields: [guildId], references: [id])
+  guildId BigInt
 }
