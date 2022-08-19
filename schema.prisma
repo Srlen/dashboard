@@ -14,7 +14,7 @@ model Guild {
 }
 
 model Prefix {
-  id      Int  @id @default(autoincrement())
+  count      Int  @id @default(autoincrement())
   prefix String
   Guild   Guild  @relation(fields: [guildId], references: [id])
   guildId BigInt
