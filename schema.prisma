@@ -20,6 +20,10 @@ model Channel {
   guildId BigInt
 }
 
+model User {
+  id BigInt @id @unique
+}
+
 model Prefix {
   count   Int    @id @default(autoincrement())
   prefix  String
