@@ -1,12 +1,10 @@
-import logging
-import os
-import discord
-import sys
 
 from quart import Blueprint, redirect, url_for, render_template, current_app
 from quart_discord import Unauthorized, requires_authorization
 
 auth = Blueprint("auth", __name__)
+
+
 @auth.route("/")
 async def index():
     if not await current_app.discord.authorized:
@@ -18,11 +16,13 @@ async def index():
 async def login_with_data():
     return await current_app.discord.create_session()
 
+
 @auth.route("/logout/")
 @requires_authorization
 async def logout():
     current_app.discord.revoke()
     return redirect("http://127.0.0.1:5000/")
+
 
 @auth.route("/callback/")
 async def callback():
