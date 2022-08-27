@@ -3,7 +3,7 @@ import sys
 import logging
 import discord
 from discord.ext import commands, ipc
-from discord.ext.ipc.server import route
+from discord.ext.ipc.server import Server
 from discord.ext.ipc.errors import IPCError
 
 class Routes(commands.Cog):
@@ -26,7 +26,7 @@ class Routes(commands.Cog):
     async def on_ipc_error(self, endpoint: str, error: IPCError):
         logging.error(endpoint, "raised", error, file=sys.stderr)
     
-    @route()
+    @Server.route()
     async def auth_done(self, data):
         user = await self.bot.fetch_user(data.user_id)
         await user.send(embed=discord.Embed(description="Done you make an connections with me!", title="done!", colour=discord.Colour.green()))
