@@ -1,5 +1,5 @@
-from quart import Blueprint, redirect, url_for, render_template, current_app
-from quart_discord import Unauthorized, requires_authorization
+from quart import Blueprint, current_app
+from quart_discord import requires_authorization
 
 guilds = Blueprint("guilds", __name__)
 
