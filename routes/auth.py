@@ -1,38 +1,6 @@
-import logging
-import discord
-import sys
 
 from quart import Blueprint, redirect, url_for, render_template, current_app
 from quart_discord import Unauthorized, requires_authorization
-
-from discord.ext import commands, ipc
-from discord.ext.ipc.errors import IPCError
-from discord.ext.ipc.server import route
-
-
-# class Routes(commands.Cog):
-#     """"""
-#     def __init__(self, bot):
-#         self.bot = bot
-#         if not hasattr(bot, "ipc"):
-#             bot.ipc = ipc.Server(self.bot, host="127.0.0.1", port=5000, secret_key="your_secret_key_here")
-#             bot.ipc.start()
-#         @commands.Cog.listener()
-#         async def on_ipc_ready(self):
-#          logging.info("Ipc is ready")
-    
-#         @commands.Cog.listener()
-#         async def on_ipc_error(self, endpoint: str, error: IPCError):
-#           logging.error(endpoint, "raised", error, file=sys.stderr)
-        
-#         @route()
-#         async def get_user_data(self, data):
-#          user = self.bot.get_user(data.user_id)
-#          return user._to_minimal_user_json() # THE OUTPUT MUST BE JSON SERIALIZABLE!
-
-# async def setup(bot):
-#     await bot.add_cog(Routes(bot))
-
 
 auth = Blueprint("auth", __name__)
 
@@ -46,7 +14,8 @@ async def index():
 
 @auth.route("/login-data/")
 async def login_with_data():
-    return await current_app.discord.create_session(data=dict(redirect="/me/", coupon="15off", number=15, zero=0, status=False))
+    return await current_app.discord.create_session()
+
 
 @auth.route("/logout/")
 @requires_authorization
@@ -58,10 +27,11 @@ async def logout():
 @auth.route("/callback/")
 async def callback():
     await current_app.discord.callback()
-
     user = await current_app.discord.fetch_user()
-
+    async with current_app.ipc as conn:
+        await conn.request("auth_done", user_id=user.id)
     return redirect(url_for(".me"))
+
 
 @auth.route("/me/")
 @requires_authorization

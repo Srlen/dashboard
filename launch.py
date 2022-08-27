@@ -1,9 +1,9 @@
 import os
 import discord
-from discord.ext import ipc
 from prisma.utils import async_run
 from bot import MainBot
 from helpers.prefix import prefix_bot
+from discord.ext import ipc
 bot = MainBot(
     command_prefix=prefix_bot,
     description="Bot.",

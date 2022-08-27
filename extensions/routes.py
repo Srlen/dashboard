@@ -33,4 +33,8 @@ class Routes(commands.Cog):
         return user._to_minimal_user_json() # THE OUTPUT MUST BE JSON SERIALIZABLE!
 
 async def setup(bot):
+<<<<<<< HEAD
+=======
+    print("test2")
+>>>>>>> 3f7aed4ef2e4044250855d0c435d56610e38c0ba
     await bot.add_cog(Routes(bot))
