@@ -1,8 +1,6 @@
 import os
-import discord
 from discord.ext.commands import Bot as BotBase
 from prisma import Prisma
-from discord.ext.ipc import Server
 # from dashboard import app
 class MainBot(BotBase):
     # web = app

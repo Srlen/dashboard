@@ -12,7 +12,7 @@ async def index():
     return redirect(url_for(".me"))
 
 
-@auth.route("/login-data/")
+@auth.route("/login/")
 async def login_with_data():
     return await current_app.discord.create_session()
 
@@ -28,8 +28,7 @@ async def logout():
 async def callback():
     await current_app.discord.callback()
     user = await current_app.discord.fetch_user()
-    async with current_app.ipc as conn:
-        await conn.request("auth_done", user_id=user.id)
+    await current_app.ipc.request("auth_done", user_id=user.id)
     return redirect(url_for(".me"))
 
 
