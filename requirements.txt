@@ -1,6 +1,6 @@
 discord.py
 quart
 better-ipc
-prisma==0.6.6
+prisma
 quart-discord
 python-dotenv

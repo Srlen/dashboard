@@ -21,11 +21,10 @@ app.config["DISCORD_REDIRECT_URI"] = "http://127.0.0.1:5000/callback/"
 # Required to access BOT resources.
 app.config["DISCORD_BOT_TOKEN"] = os.environ["BOT_TOKEN"]
 discord = DiscordOAuth2Session(app)
-app.ipc = Client(standard_port=4000, secret_key=os.environ["SECRET_KEY"])
+app.ipc = Client(secret_key=os.environ["SECRET_KEY"], do_multicast=False)
 app.register_blueprint(auth, url_prefix="/")
 app.register_blueprint(user, url_prefix="/")
 app.register_blueprint(guilds, url_prefix="/")
 
-
 if __name__ == '__main__':
-    app.run(use_reloader=True, debug=True)
+    app.run(use_reloader=True, debug=True, port=5000)

@@ -3,17 +3,42 @@
     border-radius: 50px;
     filter: grayscale(50%);
 }
+.user-avatar {
+    border-radius: 100px;
+}
 .guilds {
     display: flex;
     list-style: none;
     flex-flow: row wrap;
     justify-content: center;
+    gap: 10rem;
 }
 .temp-box {
-    border: 8px solid cornflowerblue;
     width: 300px;
+    outline: 8px solid cornflowerblue;
+    border: 16px solid transparent;
     border-radius: 50px;
-    margin: 100px;
     text-align: center;
     box-shadow: 10px 10px black;
-} 
+}
+.user-box {
+    outline: 8px solid cornflowerblue;
+    border: 10px solid transparent;
+    border-radius: 50px;
+    padding: 0 100px;
+}
+.border {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;    
+    align-content: space-between;
+    width: 300px;
+    gap: 100px;
+    align-items: center;
+}
+#user {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 100px;
+}

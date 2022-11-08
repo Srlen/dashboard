@@ -10,7 +10,9 @@ class Routes(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
         if not hasattr(bot, "ipc"):
-            bot.ipc = ipc.Server(self.bot, standard_port=4000, secret_key=os.environ["SECRET_KEY"], do_multicast=False)
+            bot.ipc = ipc.Server(self.bot, secret_key=os.environ["SECRET_KEY"], do_multicast=False)
+
+
 
     async def cog_load(self) -> None:
         await self.bot.ipc.start()
